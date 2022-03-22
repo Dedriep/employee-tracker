@@ -1,7 +1,7 @@
 CREATE TABLE department(
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    department_name VARCHAR(30) NOT NULL,
-)
+    department_name VARCHAR(30) NOT NULL
+);
 CREATE TABLE role(
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
@@ -9,8 +9,8 @@ CREATE TABLE role(
     department_id INTEGER NOT NULL, 
     FOREIGN KEY (department_id)
         REFERENCES department(id)
-        ON DELETE CASCADE,
-)
+        ON DELETE CASCADE
+);
 
 CREATE TABLE employee(
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -24,6 +24,6 @@ CREATE TABLE employee(
 
     FOREIGN KEY (manager_id)
         REFERENCES employee(id)
-        ON DELETE SET NULL,
+        ON DELETE SET NULL
     
 )
