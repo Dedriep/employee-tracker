@@ -1,5 +1,7 @@
 const inquirer =require('inquirer'); 
-//const db = require('./config/connection'); 
+const db = require('./config/connection'); 
+
+
 
 
 function init(){
@@ -15,6 +17,7 @@ function init(){
         console.log(answers);
         //switch or if else if 
         if(answers.myOptions === "View all Departments"){
+            
 
         }else {
             //for exit 
@@ -23,5 +26,11 @@ function init(){
         }
     })
 }
+
+
+// function viewAllDepartments () {
+//     const sql = DESCRIBE * 
+
+// }
 
 init(); 
