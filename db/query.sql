@@ -1,8 +1,7 @@
---View data 
+DROP DATABASE IF EXISTS employeetrackerdb; 
+
+CREATE DATABASE employeetrackerdb; 
+
 USE employeetrackerdb; 
 
---View all records from department table 
-SELECT * FROM department; 
-
---View Roles and department 
 

@@ -1,6 +1,7 @@
 const inquirer =require('inquirer'); 
 //const db = require('./config/connection'); 
 
+
 function init(){
     console.log("Welcome Employee Tracker Database ............/n"); 
     inquirer.prompt([
@@ -8,13 +9,13 @@ function init(){
             name: "myOptions", 
             type:"list", 
             message: "What would you like to do ? ", 
-            choices: ["View all Departments", "Exit"]
+            choices: ["View all Departments", "View all roles", "view all employees","add a department","adda role", "add an employee","update an eomployee role", "Exit"]
         }
     ]).then(answers =>{
         console.log(answers);
         //switch or if else if 
         if(answers.myOptions === "View all Departments"){
-            console.log("Coming soon....")
+
         }else {
             //for exit 
             console.log("Goodbye ............");

@@ -1,13 +1,8 @@
-DROP DATABASE IF EXISTS employeetrackerdb; 
 
-CREATE DATABASE employeetrackerdb; 
 
-USE employeetrackerdb; 
-
---CReate the three tables 
 CREATE TABLE department(
     id INTEGER AUTO_INCREMENT PRIMARY_KEY,
-    name VARCHAR(30) NOT NULL
+    department_name VARCHAR(30) NOT NULL,
 )
 
 CREATE TABLE role (
