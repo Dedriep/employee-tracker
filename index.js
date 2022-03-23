@@ -1,5 +1,6 @@
 const inquirer =require('inquirer'); 
 const db = require('./config/connection'); 
+const mysql = require('mysql2')
 
 
 
@@ -17,8 +18,7 @@ function init(){
         console.log(answers);
         //switch or if else if 
         if(answers.myOptions === "View all Departments"){
-            
-
+            viewAllDepartments();
         }else {
             //for exit 
             console.log("Goodbye ............");
@@ -28,9 +28,11 @@ function init(){
 }
 
 
-// function viewAllDepartments () {
-//     const sql = DESCRIBE * 
+function viewAllDepartments () {
 
-// }
+    const sql = `DESCRIBE department`
+    db.query(sql)
+
+}
 
 init(); 
