@@ -1,6 +1,8 @@
 const inquirer =require('inquirer'); 
 const db = require('./config/connection'); 
 const mysql = require('mysql2')
+const cTable = require('console.table');
+
 
 
 
@@ -31,7 +33,16 @@ function init(){
 function viewAllDepartments () {
 
     const sql = `DESCRIBE department`
-    db.query(sql)
+    db.query(sql,(err,res)=>{
+        if (err)  {
+        console.log(error)
+    }
+        else {
+        return console.table(sql)
+    }
+    
+
+    })
 
 }
 
