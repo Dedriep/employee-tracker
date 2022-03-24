@@ -113,7 +113,7 @@ function allemployees() {
             console.log(error)
         }
         else {
-            return console.table(viewAllDepartments())
+            return console.table(res)
         }
 
 
@@ -150,7 +150,7 @@ function addDepartment() {
         else {
             console.log('Department created')
 
-            return console.table(res)
+            return console.table(viewAllDepartments())
         }
     })
 
