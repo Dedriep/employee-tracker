@@ -7,9 +7,9 @@ const cTable = require('console.table');
 
 
 
-function init() {
+async function init() {
     console.log("Welcome Employee Tracker Database ............/n");
-    inquirer.prompt([
+    await inquirer.prompt([
         {
             name: "myOptions",
             type: "list",
@@ -67,7 +67,7 @@ function init() {
 
 // function to view all departments
 
-function viewAllDepartments() {
+ function viewAllDepartments() {
 
     const sql = `SELECT * FROM department`
     db.query(sql, (err, res) => {
@@ -80,7 +80,7 @@ function viewAllDepartments() {
 
 
     })
-
+init()
 }
 
 // function to get all roles
@@ -164,12 +164,19 @@ function addDepartment() {
 }
 
 
-function addRole() {
+const addRole = async () => {
 
+var departments; 
 
+    const sql = `SELECT * FROM department`
+     const dbquery = await db.query(sql)
+        
+    console.log(dbquery)
 
-    // })
-
+    const departmentChoices = departments.map(({ id, department_name }) => ({
+        name: department_name,
+        value: id
+}));
 
     inquirer.prompt([
         {
@@ -186,19 +193,22 @@ function addRole() {
         },
         {
             name: "roleDep",
-            type: "integer",
+            type: "list",
             message: "What is the Department? ",
-            
-        }
+            choices: departmentChoices
+        },
+
+    
+
         
     ]).then(answers => {
-        console.log(answers);
+        console.log(answers.roleDep);
     
         const role = answers.role
         const salary = answers.roleSalary
         const roleDep = answers.roleDep
 
-    const sql = `INSERT INTO role (tile, salary, department_id)
+    const sql = `INSERT INTO role (title, salary, department_id)
     VALUES('${role}', '${salary}', '${roleDep}');`
 
     db.query(sql, (err, res) => {
