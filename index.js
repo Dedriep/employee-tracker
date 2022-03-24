@@ -21,7 +21,12 @@ function init(){
         //switch or if else if 
         if(answers.myOptions === "View all Departments"){
             viewAllDepartments();
-        }else {
+        } if (answers.myOptions === "View all roles") {
+            allroles()
+        }
+        
+        
+        else {
             //for exit 
             console.log("Goodbye ............");
             process.exit(0); 
@@ -30,20 +35,44 @@ function init(){
 }
 
 
+
+
 function viewAllDepartments () {
 
-    const sql = `DESCRIBE department`
+    const sql = `SELECT * FROM department`
     db.query(sql,(err,res)=>{
         if (err)  {
         console.log(error)
     }
         else {
-        return console.table([sql])
+        return console.table(res)
     }
     
 
     })
 
 }
+
+
+function allroles (){
+    //const sql = `SELECT * FROM role LEFT JOIN department ON role.department_id =department.id` 
+    const sql = `SELECT role.*, department_name
+    FROM role
+    LEFT JOIN department ON role.department_id =department.id` 
+
+
+    db.query(sql,(err,res)=>{
+        if (err)  {
+        console.log(error)
+    }
+        else {
+        return console.table(res)
+    }
+    
+
+    })
+}
+
+
 
 init(); 
