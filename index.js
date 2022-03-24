@@ -194,10 +194,12 @@ function addRole() {
     ]).then(answers => {
         console.log(answers);
     
-        const params = [answers.role, answers.roleSalary, answers.roleDep]
+        const role = answers.role
+        const salary = answers.roleSalary
+        const roledep = answers.roleDep
 
     const sql = `INSERT INTO role (tile, salary, department_id)
-    VALUES('${params}');`
+    VALUES('${role}', '${salary}', '${roleDep}');`
 
 
     db.query(sql, (err, res) => {
