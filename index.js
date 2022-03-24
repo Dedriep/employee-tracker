@@ -137,7 +137,7 @@ function addDepartment() {
     ]).then(answers => {
         console.log(answers);
     
-        const params = answers
+        const params = answers.department
 
     const sql = `INSERT INTO department (department_name)
     VALUES('${params}');`
@@ -148,7 +148,7 @@ function addDepartment() {
             console.log(error)
         }
         else {
-            console.log('Department created')
+            console.log('Department created! Please see updated department list')
 
             return console.table(viewAllDepartments())
         }
