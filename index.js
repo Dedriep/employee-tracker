@@ -113,7 +113,7 @@ function allemployees() {
             console.log(error)
         }
         else {
-            viewAllDepartments()
+            return console.table(viewAllDepartments())
         }
 
 
