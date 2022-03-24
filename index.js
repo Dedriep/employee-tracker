@@ -113,7 +113,7 @@ function allemployees() {
             console.log(error)
         }
         else {
-            return console.table(res)
+            viewAllDepartments()
         }
 
 
@@ -137,7 +137,7 @@ function addDepartment() {
     ]).then(answers => {
         console.log(answers);
     
-        const params = [answers]
+        const params = answers
 
     const sql = `INSERT INTO department (department_name)
     VALUES('${params}');`
@@ -148,6 +148,8 @@ function addDepartment() {
             console.log(error)
         }
         else {
+            console.log('Department created')
+
             return console.table(res)
         }
     })
