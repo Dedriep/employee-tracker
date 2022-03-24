@@ -14,7 +14,7 @@ function init() {
             name: "myOptions",
             type: "list",
             message: "What would you like to do ? ",
-            choices: ["View all Departments", "View all roles", "view all employees", "add a department", "adda role", "add an employee", "update an employee role", "Exit"]
+            choices: ["View all Departments", "View all roles", "view all employees", "add a department", "add a role", "add an employee", "update an employee role", "Exit"]
         }
     ]).then(answers => {
         console.log(answers);
@@ -32,7 +32,9 @@ function init() {
             case "add a department":
                 addDepartment()
                 break;
-           
+            case "add a role":
+                    addRole()
+                    break;
             case "Exit":
                 console.log("Goodbye ............");
                 process.exit(0);
@@ -160,5 +162,62 @@ function addDepartment() {
 
 
 }
+
+
+function addRole() {
+
+
+
+    // })
+
+
+    inquirer.prompt([
+        {
+            name: "role",
+            type: "input",
+            message: "What is the name of the new role? ",
+            
+        },
+        {
+            name: "roleSalary",
+            type: "integer",
+            message: "What is the salary ",
+            
+        },
+        {
+            name: "roleDep",
+            type: "integer",
+            message: "What is the Department? ",
+            
+        }
+        
+    ]).then(answers => {
+        console.log(answers);
+    
+        const params = [answers.role, answers.roleSalary, answers.roleDep]
+
+    const sql = `INSERT INTO role (tile, salary, department_id)
+    VALUES('${params}');`
+
+
+    db.query(sql, (err, res) => {
+        if (err) {
+            console.log(error)
+        }
+        else {
+            console.log('Role created! Please see updated role list')
+
+            return console.table(allroles())
+        }
+    })
+
+    })
+
+
+
+
+}
+
+
 
 init(); 
