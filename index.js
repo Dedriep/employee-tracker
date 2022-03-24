@@ -27,7 +27,7 @@ function init() {
                 allroles()
                 break;
             case "view all employees":
-                allemployees
+                allemployees ()
               break;
             case "add a department":
                 addDepartment()
@@ -136,13 +136,14 @@ function addDepartment() {
         }
     ]).then(answers => {
         console.log(answers);
-        
+    
+        const params = [answers]
+
     const sql = `INSERT INTO department (department_name)
-    VALUES ('?');`
+    VALUES('${params}');`
 
-    const params = [answers]
 
-    db.query(sql, params, (err, res) => {
+    db.query(sql, (err, res) => {
         if (err) {
             console.log(error)
         }
