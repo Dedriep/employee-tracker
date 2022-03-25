@@ -164,19 +164,29 @@ function addDepartment() {
 }
 
 
-const addRole = async () => {
+function addRole () {
 
 var departments; 
 
-    const sql = `SELECT * FROM department`
-     const dbquery = await db.query(sql)
+//     const sql = `SELECT * FROM department`
+//      const dbquery = await db.query(sql)
         
-    console.log(dbquery)
+//     console.log(dbquery)
 
-    const departmentChoices = departments.map(({ id, department_name }) => ({
-        name: department_name,
-        value: id
-}));
+//    
+
+function getDeptsQuery(){
+    const sql = `SELECT * FROM department`
+    return db.promise().query(sql)
+}
+
+getDeptsQuery()
+.then (([rows]) => {
+    let department = rows
+    const departmentChoices = department.map(({ id, department_name }) => ({
+                name: department_name,
+                value: id
+        }))
 
     inquirer.prompt([
         {
@@ -201,8 +211,7 @@ var departments;
     
 
         
-    ]).then(answers => {
-        console.log(answers.roleDep);
+    ]).then(answers => db.addNewDeptQuery(
     
         const role = answers.role
         const salary = answers.roleSalary
@@ -220,13 +229,10 @@ var departments;
 
             return console.table(allroles())
         }
-    })
+    }
 
-    })
-
-
-
-
+.then(() => init())
+})
 }
 
 
