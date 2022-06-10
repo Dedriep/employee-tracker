@@ -1,6 +1,5 @@
 const inquirer = require('inquirer');
 const db = require('./config/connection');
-//const mysql = require('mysql2')
 const cTable = require('console.table');
 
 
@@ -27,14 +26,14 @@ async function init() {
                 allroles()
                 break;
             case "view all employees":
-                allemployees ()
-              break;
+                allemployees()
+                break;
             case "add a department":
                 addDepartment()
                 break;
             case "add a role":
-                    addRole()
-                    break;
+                addRole()
+                break;
             case "Exit":
                 console.log("Goodbye ............");
                 process.exit(0);
@@ -67,7 +66,7 @@ async function init() {
 
 // function to view all departments
 
- function viewAllDepartments() {
+function viewAllDepartments() {
 
     const sql = `SELECT * FROM department`
     db.query(sql, (err, res) => {
@@ -80,7 +79,7 @@ async function init() {
 
 
     })
-init()
+    init()
 }
 
 // function to get all roles
@@ -126,7 +125,7 @@ function addDepartment() {
 
 
 
-    // })
+
 
 
     inquirer.prompt([
@@ -134,27 +133,27 @@ function addDepartment() {
             name: "department",
             type: "input",
             message: "What is the department's name? ",
-            
+
         }
     ]).then(answers => {
         console.log(answers);
-    
+
         const params = answers.department
 
-    const sql = `INSERT INTO department (department_name)
+        const sql = `INSERT INTO department (department_name)
     VALUES('${params}');`
 
 
-    db.query(sql, (err, res) => {
-        if (err) {
-            console.log(error)
-        }
-        else {
-            console.log('Department created! Please see updated department list')
+        db.query(sql, (err, res) => {
+            if (err) {
+                console.log(error)
+            }
+            else {
+                console.log('Department created! Please see updated department list')
 
-            return console.table(viewAllDepartments())
-        }
-    })
+                return console.table(viewAllDepartments())
+            }
+        })
 
     })
 
@@ -164,76 +163,77 @@ function addDepartment() {
 }
 
 
-function addRole () {
+function addRole() {
 
-var departments; 
+    var departments;
 
-//     const sql = `SELECT * FROM department`
-//      const dbquery = await db.query(sql)
-        
-//     console.log(dbquery)
+    //     const sql = `SELECT * FROM department`
+    //      const dbquery = await db.query(sql)
 
-//    
+    //     console.log(dbquery)
 
-function getDeptsQuery(){
-    const sql = `SELECT * FROM department`
-    return db.promise().query(sql)
-}
+    //    
 
-getDeptsQuery()
-.then (([rows]) => {
-    let department = rows
-    const departmentChoices = department.map(({ id, department_name }) => ({
-                name: department_name,
-                value: id
-        }))
-
-    inquirer.prompt([
-        {
-            name: "role",
-            type: "input",
-            message: "What is the name of the new role? ",
-            
-        },
-        {
-            name: "roleSalary",
-            type: "integer",
-            message: "What is the salary ",
-            
-        },
-        {
-            name: "roleDep",
-            type: "list",
-            message: "What is the Department? ",
-            choices: departmentChoices
-        },
-
-    
-
-        
-    ]).then(answers => db.addNewDeptQuery(
-    
-        const role = answers.role
-        const salary = answers.roleSalary
-        const roleDep = answers.roleDep
-
-    const sql = `INSERT INTO role (title, salary, department_id)
-    VALUES('${role}', '${salary}', '${roleDep}');`
-
-    db.query(sql, (err, res) => {
-        if (err) {
-            console.log(error)
-        }
-        else {
-            console.log('Role created! Please see updated role list')
-
-            return console.table(allroles())
-        }
+    function getDeptsQuery() {
+        const sql = `SELECT * FROM department`
+        return db.promise().query(sql)
     }
 
-.then(() => init())
-})
-}
+    getDeptsQuery()
+        .then(([rows]) => {
+            let department = rows
+            const departmentChoices = department.map(({ id, department_name }) => ({
+                name: department_name,
+                value: id
+            }))
+
+            inquirer.prompt([
+                {
+                    name: "role",
+                    type: "input",
+                    message: "What is the name of the new role? ",
+
+                },
+                {
+                    name: "roleSalary",
+                    type: "integer",
+                    message: "What is the salary ",
+
+                },
+                {
+                    name: "roleDep",
+                    type: "list",
+                    message: "What is the Department? ",
+                    choices: departmentChoices
+                },
+
+
+
+
+            ]).then(answers => {
+                const role = answers.role
+                const salary = answers.roleSalary
+                const roleDep = answers.roleDep
+
+                const sql = `INSERT INTO role (title, salary, department_id)
+    VALUES('${role}', '${salary}', '${roleDep}');` 
+
+                db.addNewDeptQuery(
+
+                db.query(sql, (err, res) => {
+                    if (err) {
+                        console.log(error)
+                    }
+                    else {
+                        console.log('Role created! Please see updated role list')
+
+                        return console.table(allroles())
+                    }
+                }
+                )
+                    .then(() => init())
+        )})})
+        }
 
 
 
