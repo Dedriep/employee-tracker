@@ -165,15 +165,6 @@ function addDepartment() {
 
 function addRole() {
 
-    var departments;
-
-    //     const sql = `SELECT * FROM department`
-    //      const dbquery = await db.query(sql)
-
-    //     console.log(dbquery)
-
-    //    
-
     function getDeptsQuery() {
         const sql = `SELECT * FROM department`
         return db.promise().query(sql)
@@ -218,8 +209,6 @@ function addRole() {
                 const sql = `INSERT INTO role (title, salary, department_id)
     VALUES('${role}', '${salary}', '${roleDep}');` 
 
-                db.addNewDeptQuery(
-
                 db.query(sql, (err, res) => {
                     if (err) {
                         console.log(error)
@@ -231,8 +220,7 @@ function addRole() {
                     }
                 }
                 )
-                    .then(() => init())
-        )})})
+        })})
         }
 
 
